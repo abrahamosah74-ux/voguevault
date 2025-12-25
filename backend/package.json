@@ -23,6 +23,8 @@
   },
   "devDependencies": {
     "concurrently": "^8.0.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.2",
+    "@types/bcrypt": "^5.0.0"
   }
 }
