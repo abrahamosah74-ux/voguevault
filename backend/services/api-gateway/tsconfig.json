@@ -23,7 +23,6 @@
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
     "baseUrl": "../..",
-    "types": ["node"],
     "paths": {
       "@/*": ["./*"],
       "@config/*": ["./config/*"],
