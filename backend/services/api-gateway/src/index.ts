@@ -5,7 +5,7 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import morgan from 'morgan';
 import 'express-async-errors';
-import config from 'config';
+import { config } from '../../../config';
 import { errorResponse } from 'shared/utils';
 import authRoutes from './routes/auth.routes';
 import userRoutes from './routes/user.routes';

@@ -1,7 +1,7 @@
 // Authentication Routes
 import { Router, Request, Response } from 'express';
 import axios from 'axios';
-import config from 'config';
+import { config } from '../../../../config';
 import { successResponse, errorResponse, ApiError } from 'shared/utils';
 
 const router = Router();
