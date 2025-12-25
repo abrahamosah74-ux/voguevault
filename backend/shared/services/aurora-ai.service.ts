@@ -60,15 +60,7 @@ export interface OutfitRecommendation {
   id: string;
   items: any[]; // Product IDs
   confidenceScore: number;
-  emotionalFitAnalysis: {
-    confidenceBoost: number;
-    authenticity: number;
-    moodImpact: {
-      happiness: number;
-      comfort: number;
-      empowerment: number;
-    };
-  };
+  emotionalFitAnalysis: EmotionalFitAnalysis;
   contextMatch: {
     weatherAppropriate: boolean;
     occasionAppropriate: boolean;
