@@ -24,8 +24,5 @@
   "devDependencies": {
     "concurrently": "^8.0.0",
     "typescript": "^5.0.0"
-  },
-  "workspaces": [
-    "services/*"
-  ]
+  }
 }
