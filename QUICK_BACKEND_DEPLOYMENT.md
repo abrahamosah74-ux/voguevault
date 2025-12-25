@@ -43,7 +43,7 @@
 
 ### Part 3: Add Environment Variables (5 min)
 
-While building, go to **Settings** → **Environment** and add:
+While building, go to **Settings** → **Environment** and add each variable:
 
 **Server Configuration:**
 ```
@@ -53,8 +53,8 @@ PORT=3000
 
 **Database:**
 ```
-DATABASE_URL=<paste_the_database_url_here>
-POSTGRES_HOST=<your_host_from_database>
+DATABASE_URL=postgresql://voguevault:PASSWORD@HOST:5432/voguevault
+POSTGRES_HOST=HOST
 POSTGRES_PORT=5432
 POSTGRES_USER=voguevault
 POSTGRES_DB=voguevault
@@ -70,9 +70,9 @@ CORS_ORIGIN=https://voguevault.vercel.app
 **File Storage (Cloudinary):**
 ```
 STORAGE_TYPE=cloudinary
-CLOUDINARY_CLOUD_NAME=<your_cloud_name>
-CLOUDINARY_API_KEY=<your_api_key>
-CLOUDINARY_API_SECRET=<your_api_secret>
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
 ```
 
 Save and wait for auto-redeploy.
@@ -148,3 +148,4 @@ For troubleshooting, see: **BACKEND_DEPLOYMENT_RENDER.md**
 ---
 
 **Done! 🎉**
+
