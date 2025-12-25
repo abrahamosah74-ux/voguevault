@@ -45,20 +45,34 @@
 
 While building, go to **Settings** → **Environment** and add:
 
+**Server Configuration:**
 ```
 NODE_ENV=production
 PORT=3000
+```
+
+**Database:**
+```
 DATABASE_URL=<paste_the_database_url_here>
-POSTGRES_HOST=your_host
+POSTGRES_HOST=<your_host_from_database>
 POSTGRES_PORT=5432
 POSTGRES_USER=voguevault
 POSTGRES_DB=voguevault
-JWT_ACCESS_SECRET=your-secret-key-12345
-JWT_REFRESH_SECRET=your-secret-key-67890
+```
+
+**Authentication:**
+```
+JWT_ACCESS_SECRET=Y2Y0ZWQ0NDYtMzk1MC00NWQ1LTlmYTktMjJiZTIxN2RlNWRlYTNkZDExOTMtMzgwNS00YTZjLWJlZmItZWY2MTIxODJiNzQ2
+JWT_REFRESH_SECRET=OThjM2Y0ZTEtZjc2My00YWVmLWIzNjEtMjgzNmEzMTZjNGI0YjgxODUzOGUtYzU4OC00YjE4LWEzZGItZTAyN2MzZjcyYTk3
 CORS_ORIGIN=https://voguevault.vercel.app
-AWS_S3_BUCKET=voguevault-models
-AWS_ACCESS_KEY_ID=your_aws_key
-AWS_SECRET_ACCESS_KEY=your_aws_secret
+```
+
+**File Storage (Cloudinary):**
+```
+STORAGE_TYPE=cloudinary
+CLOUDINARY_CLOUD_NAME=<your_cloud_name>
+CLOUDINARY_API_KEY=<your_api_key>
+CLOUDINARY_API_SECRET=<your_api_secret>
 ```
 
 Save and wait for auto-redeploy.

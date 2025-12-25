@@ -38,32 +38,37 @@ DATABASE_URL=postgresql://voguevault:PASSWORD@HOST:5432/voguevault
 
 ## 🔑 PART 2: GET ALL ENVIRONMENT VARIABLES
 
-### A) JWT Secrets (Use these)
+### A) Server Configuration
+```
+NODE_ENV=production
+PORT=3000
+```
+
+### B) Database (From Render)
+```
+DATABASE_URL=postgresql://voguevault:PASSWORD@HOST:5432/voguevault
+POSTGRES_HOST=HOST (from database URL)
+POSTGRES_PORT=5432
+POSTGRES_USER=voguevault
+POSTGRES_DB=voguevault
+```
+
+### C) Authentication (Use these JWT secrets)
 ```
 JWT_ACCESS_SECRET=Y2Y0ZWQ0NDYtMzk1MC00NWQ1LTlmYTktMjJiZTIxN2RlNWRlYTNkZDExOTMtMzgwNS00YTZjLWJlZmItZWY2MTIxODJiNzQ2
 JWT_REFRESH_SECRET=OThjM2Y0ZTEtZjc2My00YWVmLWIzNjEtMjgzNmEzMTZjNGI0YjgxODUzOGUtYzU4OC00YjE4LWEzZGItZTAyN2MzZjcyYTk3
-```
-
-### B) CORS Origin (Your Vercel URL)
-```
 CORS_ORIGIN=https://voguevault.vercel.app
 ```
 
-### C) AWS Keys
+### D) File Storage (Cloudinary - works globally!)
 
-**See: AWS_KEYS_QUICK.md or GET_AWS_KEYS.md**
-
-Steps:
-1. Create S3 bucket: `voguevault-models`
-2. Create IAM user: `voguevault-app`
-3. Get Access Key ID and Secret Access Key
-4. Copy both values
+See: **CLOUDINARY_SETUP.md** for getting these values
 
 ```
-AWS_S3_BUCKET=voguevault-models
-AWS_S3_REGION=us-east-1
-AWS_ACCESS_KEY_ID=AKIA...
-AWS_SECRET_ACCESS_KEY=...
+STORAGE_TYPE=cloudinary
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
 ```
 
 ---
@@ -99,25 +104,36 @@ AWS_SECRET_ACCESS_KEY=...
 3. Scroll to **Environment**
 4. Click **"Add Environment Variable"** for each:
 
-**Add these variables:**
+**Add these variables (organized by category):**
+
+**Server:**
 ```
 NODE_ENV=production
 PORT=3000
+```
+
+**Database:**
+```
 DATABASE_URL=postgresql://voguevault:PASSWORD@HOST:5432/voguevault
-POSTGRES_HOST=HOST (from database URL)
+POSTGRES_HOST=HOST
 POSTGRES_PORT=5432
 POSTGRES_USER=voguevault
 POSTGRES_DB=voguevault
+```
 
+**Authentication:**
+```
 JWT_ACCESS_SECRET=Y2Y0ZWQ0NDYtMzk1MC00NWQ1LTlmYTktMjJiZTIxN2RlNWRlYTNkZDExOTMtMzgwNS00YTZjLWJlZmItZWY2MTIxODJiNzQ2
 JWT_REFRESH_SECRET=OThjM2Y0ZTEtZjc2My00YWVmLWIzNjEtMjgzNmEzMTZjNGI0YjgxODUzOGUtYzU4OC00YjE4LWEzZGItZTAyN2MzZjcyYTk3
-
 CORS_ORIGIN=https://voguevault.vercel.app
+```
 
-AWS_S3_BUCKET=voguevault-models
-AWS_S3_REGION=us-east-1
-AWS_ACCESS_KEY_ID=YOUR_AWS_KEY
-AWS_SECRET_ACCESS_KEY=YOUR_AWS_SECRET
+**File Storage (Cloudinary):**
+```
+STORAGE_TYPE=cloudinary
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
 ```
 
 **Click Save** and wait for auto-redeploy (1-2 minutes)
