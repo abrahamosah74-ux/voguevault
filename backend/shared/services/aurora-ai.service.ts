@@ -194,7 +194,7 @@ export class AuroraAI {
       const outfit = this.composeOutfit(scoredProducts, context);
 
       // Step 4: Analyze emotional fit
-      const emotionalAnalysis = await this.analyzeEmotionalFit(outfit, context);
+      const emotionalFitAnalysis = await this.analyzeEmotionalFit(outfit, context);
 
       // Step 5: Generate explanation
       const explanation = this.generateExplanation(outfit, context);
@@ -206,7 +206,7 @@ export class AuroraAI {
         id: uuid(),
         items: outfit.items,
         confidenceScore: outfit.confidenceScore,
-        emotionalAnalysis,
+        emotionalFitAnalysis,
         contextMatch: this.evaluateContextMatch(outfit, context),
         alternatives,
         explanation
