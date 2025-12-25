@@ -2,7 +2,7 @@ services:
   - type: web
     name: voguevault-api-gateway
     env: node
-    buildCommand: cd backend && npm install && npm run build
+    buildCommand: cd backend && npm install && npm --prefix services/api-gateway run build
     startCommand: cd backend && node services/api-gateway/dist/index.js
     envVars:
       - key: NODE_ENV

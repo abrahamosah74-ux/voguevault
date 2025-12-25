@@ -48,31 +48,44 @@ While building, go to **Settings** → **Environment** and add each variable:
 **Server Configuration:**
 ```
 NODE_ENV=production
-PORT=3000
+PORT=3001
 ```
 
 **Database:**
 ```
-DATABASE_URL=postgresql://voguevault:PASSWORD@HOST:5432/voguevault
-POSTGRES_HOST=HOST
+POSTGRES_HOST=<your-postgres-host>
 POSTGRES_PORT=5432
-POSTGRES_USER=voguevault
-POSTGRES_DB=voguevault
+POSTGRES_USER=<your-postgres-user>
+POSTGRES_PASSWORD=<your-postgres-password>
+POSTGRES_DB=voguevault_db
 ```
 
-**Authentication:**
+**Authentication & JWT:**
 ```
-JWT_ACCESS_SECRET=Y2Y0ZWQ0NDYtMzk1MC00NWQ1LTlmYTktMjJiZTIxN2RlNWRlYTNkZDExOTMtMzgwNS00YTZjLWJlZmItZWY2MTIxODJiNzQ2
-JWT_REFRESH_SECRET=OThjM2Y0ZTEtZjc2My00YWVmLWIzNjEtMjgzNmEzMTZjNGI0YjgxODUzOGUtYzU4OC00YjE4LWEzZGItZTAyN2MzZjcyYTk3
-CORS_ORIGIN=https://voguevault.vercel.app
+JWT_ACCESS_SECRET=<generate-random-string>
+JWT_REFRESH_SECRET=<generate-random-string>
+JWT_ACCESS_EXPIRY=15m
+JWT_REFRESH_EXPIRY=7d
 ```
 
-**File Storage (Cloudinary):**
+**Email Service (Resend):**
+```
+EMAIL_PROVIDER=resend
+RESEND_API_KEY=<your-resend-api-key>
+EMAIL_FROM=noreply@voguevault.com
+```
+
+**File Storage (Cloudinary) - Required:**
 ```
 STORAGE_TYPE=cloudinary
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
+CLOUDINARY_CLOUD_NAME=dmjqgoepy
+CLOUDINARY_API_KEY=359878233217998
+CLOUDINARY_API_SECRET=<your-cloudinary-secret>
+```
+
+**CORS:**
+```
+CORS_ORIGIN=https://your-frontend-url.com
 ```
 
 Save and wait for auto-redeploy.
