@@ -33,7 +33,9 @@
     }
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "../../shared/**/*",
+    "../../config/**/*"
   ],
   "exclude": [
     "node_modules",
