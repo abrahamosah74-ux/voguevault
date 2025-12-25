@@ -1,0 +1,8 @@
+# Render Configuration for VogueVault Backend
+# This file helps Render deploy the backend correctly
+
+# Build command: Install dependencies and compile TypeScript
+npm install && npm run build
+
+# Start command: Run the compiled API Gateway
+node services/api-gateway/dist/index.js

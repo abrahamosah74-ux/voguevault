@@ -32,7 +32,7 @@
    Region: (choose one)
    Branch: main
    Root Directory: backend
-   Build Command: npm install
+   Build Command: npm install && npm run build
    Start Command: node services/api-gateway/dist/index.js
    ```
 5. Click **Create Web Service**
