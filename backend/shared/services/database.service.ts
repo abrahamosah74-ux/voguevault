@@ -50,7 +50,7 @@ export class DatabaseService {
   /**
    * Insert a row
    */
-  async insert<T = any>(table: string, data: Record<string, any>): Promise<T> {
+  async insert<T = any>(table: string, data: Record<string, any>): Promise<T | null> {
     const columns = Object.keys(data);
     const values = Object.values(data);
     const placeholders = columns.map((_, i) => `$${i + 1}`).join(',');

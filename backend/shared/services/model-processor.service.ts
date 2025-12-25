@@ -142,8 +142,8 @@ export class ModelProcessorService {
           textureOptimizationSavings: this.calculateTextureSavings(textures)
         }
       };
-    } catch (error) {
-      console.error(`Error processing model: ${error.message}`);
+    } catch (error: any) {
+      console.error(`Error processing model: ${error?.message || error}`);
       throw error;
     }
   }
@@ -209,8 +209,8 @@ export class ModelProcessorService {
     file: Buffer,
     productId: string,
     modelId: string
-  ): Promise<Record<string, string>> {
-    const lodUrls: Record<string, string> = {};
+  ): Promise<{ high: string; medium: string; low: string }> {
+    const lodUrls: { high: string; medium: string; low: string } = { high: "", medium: "", low: "" };
 
     // High LOD (original quality)
     lodUrls.high = await this.uploadToCloudStorage(
@@ -326,8 +326,8 @@ export class ModelProcessorService {
       }
 
       throw new Error('Cloud storage client not configured');
-    } catch (error) {
-      console.error(`Upload failed: ${error.message}`);
+    } catch (error: any) {
+      console.error(`Upload failed: ${error?.message || error}`);
       throw error;
     }
   }
