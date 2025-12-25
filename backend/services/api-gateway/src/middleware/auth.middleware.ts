@@ -1,7 +1,7 @@
 // Authentication Middleware
 import { Request, Response, NextFunction } from 'express';
-import { verifyAccessToken } from '../../../shared/utils';
-import { errorResponse } from '../../../shared/utils';
+import { verifyAccessToken } from '../../../../shared/utils';
+import { errorResponse } from '../../../../shared/utils';
 
 export const authMiddleware = (
   req: Request,
