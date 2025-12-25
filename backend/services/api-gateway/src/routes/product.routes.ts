@@ -2,7 +2,7 @@
 import { Router, Request, Response } from 'express';
 import axios from 'axios';
 import { config } from '../../../../config';
-import { successResponse, errorResponse, parsePagination } from 'shared/utils';
+import { successResponse, errorResponse, parsePagination } from '../../../../shared/utils';
 
 const router = Router();
 const PRODUCT_SERVICE_URL = config.services.productService.url;
