@@ -206,7 +206,7 @@ export class AuroraAI {
         id: uuid(),
         items: outfit.items,
         confidenceScore: outfit.confidenceScore,
-        emotionalFitAnalysis,
+        emotionalFitAnalysis: emotionalAnalysis,
         contextMatch: this.evaluateContextMatch(outfit, context),
         alternatives,
         explanation
@@ -542,19 +542,6 @@ export class AuroraAI {
         : 0.5;
 
     return { items: outfit, confidenceScore };
-  }
-
-  private async analyzeEmotionalFit(outfit: any, context: FashionContext) {
-    // Placeholder - would use ML model for deeper analysis
-    return {
-      confidenceBoost: Math.random() * 100,
-      authenticity: Math.random() * 100,
-      moodImpact: {
-        happiness: Math.random() * 100,
-        comfort: Math.random() * 100,
-        empowerment: Math.random() * 100
-      }
-    };
   }
 
   private generateExplanation(outfit: any, context: FashionContext): string {
