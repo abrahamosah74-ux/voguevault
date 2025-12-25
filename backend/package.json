@@ -1,0 +1,31 @@
+{
+  "name": "voguevault-backend",
+  "version": "1.0.0",
+  "description": "VogueVault - Scalable Fashion E-commerce Backend",
+  "main": "index.js",
+  "scripts": {
+    "install-all": "npm install && cd services/api-gateway && npm install && cd ../user-service && npm install && cd ../product-service && npm install && cd ../order-service && npm install && cd ../media-service && npm install",
+    "build": "npm run build --workspace=services/api-gateway && npm run build --workspace=services/user-service && npm run build --workspace=services/product-service && npm run build --workspace=services/order-service && npm run build --workspace=services/media-service",
+    "dev": "concurrently \"cd services/api-gateway && npm run dev\" \"cd services/user-service && npm run dev\" \"cd services/product-service && npm run dev\" \"cd services/order-service && npm run dev\" \"cd services/media-service && npm run dev\"",
+    "start-api-gateway": "cd services/api-gateway && npm start",
+    "start-user-service": "cd services/user-service && npm start",
+    "start-product-service": "cd services/product-service && npm start",
+    "start-order-service": "cd services/order-service && npm start",
+    "start-media-service": "cd services/media-service && npm start",
+    "lint": "cd services/api-gateway && npm run lint && cd ../user-service && npm run lint && cd ../product-service && npm run lint && cd ../order-service && npm run lint && cd ../media-service && npm run lint",
+    "test": "echo \"Add test script\"",
+    "docker-up": "docker-compose up -d",
+    "docker-down": "docker-compose down"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "workspaces": [
+    "services/*"
+  ]
+}

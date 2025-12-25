@@ -1,0 +1,152 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: voguevault_postgres
+    environment:
+      POSTGRES_DB: voguevault_db
+      POSTGRES_USER: voguevault
+      POSTGRES_PASSWORD: your_password_here
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/schemas/postgres.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - voguevault_network
+
+  # MongoDB
+  mongodb:
+    image: mongo:6.0
+    container_name: voguevault_mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: voguevault
+      MONGO_INITDB_ROOT_PASSWORD: your_password_here
+      MONGO_INITDB_DATABASE: voguevault_users
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - voguevault_network
+
+  # Redis
+  redis:
+    image: redis:7-alpine
+    container_name: voguevault_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - voguevault_network
+
+  # API Gateway
+  api-gateway:
+    build:
+      context: ./services/api-gateway
+      dockerfile: Dockerfile
+    container_name: voguevault_api_gateway
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: 3001
+      NODE_ENV: development
+      POSTGRES_HOST: postgres
+      MONGODB_URI: mongodb://voguevault:your_password_here@mongodb:27017/voguevault_users
+      REDIS_HOST: redis
+      USER_SERVICE_URL: http://user-service:3002
+      PRODUCT_SERVICE_URL: http://product-service:3003
+      ORDER_SERVICE_URL: http://order-service:3004
+      MEDIA_SERVICE_URL: http://media-service:3005
+    depends_on:
+      - postgres
+      - mongodb
+      - redis
+    networks:
+      - voguevault_network
+
+  # User Service
+  user-service:
+    build:
+      context: ./services/user-service
+      dockerfile: Dockerfile
+    container_name: voguevault_user_service
+    ports:
+      - "3002:3002"
+    environment:
+      PORT: 3002
+      NODE_ENV: development
+      MONGODB_URI: mongodb://voguevault:your_password_here@mongodb:27017/voguevault_users
+    depends_on:
+      - mongodb
+    networks:
+      - voguevault_network
+
+  # Product Service
+  product-service:
+    build:
+      context: ./services/product-service
+      dockerfile: Dockerfile
+    container_name: voguevault_product_service
+    ports:
+      - "3003:3003"
+    environment:
+      PORT: 3003
+      NODE_ENV: development
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: voguevault
+      POSTGRES_PASSWORD: your_password_here
+      POSTGRES_DB: voguevault_db
+      REDIS_HOST: redis
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - voguevault_network
+
+  # Order Service
+  order-service:
+    build:
+      context: ./services/order-service
+      dockerfile: Dockerfile
+    container_name: voguevault_order_service
+    ports:
+      - "3004:3004"
+    environment:
+      PORT: 3004
+      NODE_ENV: development
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: voguevault
+      POSTGRES_PASSWORD: your_password_here
+      POSTGRES_DB: voguevault_db
+    depends_on:
+      - postgres
+    networks:
+      - voguevault_network
+
+  # Media Service
+  media-service:
+    build:
+      context: ./services/media-service
+      dockerfile: Dockerfile
+    container_name: voguevault_media_service
+    ports:
+      - "3005:3005"
+    environment:
+      PORT: 3005
+      NODE_ENV: development
+      STORAGE_TYPE: cloudinary
+    networks:
+      - voguevault_network
+
+volumes:
+  postgres_data:
+  mongodb_data:
+  redis_data:
+
+networks:
+  voguevault_network:
+    driver: bridge
