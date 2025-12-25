@@ -103,12 +103,7 @@ export class PaystackService {
   private axiosInstance: AxiosInstance;
 
   constructor(config: PaystackConfig) {
-    this.config = {
-      baseUrl: 'https://api.paystack.co',
-      timeout: 30000,
-      retryAttempts: 3,
-      ...config
-    };
+    this.config = config;
 
     this.axiosInstance = axios.create({
       baseURL: this.config.baseUrl,

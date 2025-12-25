@@ -206,7 +206,7 @@ export class AuroraAI {
         id: uuid(),
         items: outfit.items,
         confidenceScore: outfit.confidenceScore,
-        emotionalFitAnalysis: emotionalAnalysis,
+        emotionalFitAnalysis,
         contextMatch: this.evaluateContextMatch(outfit, context),
         alternatives,
         explanation

@@ -2,20 +2,28 @@
 
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import { config } from '../config';
+import { config } from '../../config';
 import { JwtPayload } from '../types';
 
 // ============ JWT Functions ============
 export const generateAccessToken = (id: string, email: string): string => {
-  return jwt.sign({ id, email }, config.jwt.accessTokenSecret, {
-    expiresIn: config.jwt.accessTokenExpiry,
-  });
+  return (jwt.sign as any)(
+    { id, email },
+    config.jwt.accessTokenSecret,
+    {
+      expiresIn: config.jwt.accessTokenExpiry,
+    }
+  );
 };
 
 export const generateRefreshToken = (id: string, email: string): string => {
-  return jwt.sign({ id, email }, config.jwt.refreshTokenSecret, {
-    expiresIn: config.jwt.refreshTokenExpiry,
-  });
+  return (jwt.sign as any)(
+    { id, email },
+    config.jwt.refreshTokenSecret,
+    {
+      expiresIn: config.jwt.refreshTokenExpiry,
+    }
+  );
 };
 
 export const verifyAccessToken = (token: string): JwtPayload | null => {

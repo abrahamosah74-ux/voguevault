@@ -1,8 +1,8 @@
 // User Routes
 import { Router, Request, Response } from 'express';
 import axios from 'axios';
-import config from '../../../config';
-import { successResponse, errorResponse } from '../../../shared/utils';
+import config from 'config';
+import { successResponse, errorResponse } from 'shared/utils';
 import { authMiddleware } from '../middleware/auth.middleware';
 
 const router = Router();

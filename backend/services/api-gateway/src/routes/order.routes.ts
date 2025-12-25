@@ -1,8 +1,8 @@
 // Order Routes
 import { Router, Request, Response } from 'express';
 import axios from 'axios';
-import config from '../../../config';
-import { successResponse, errorResponse, parsePagination } from '../../../shared/utils';
+import config from 'config';
+import { successResponse, errorResponse, parsePagination } from 'shared/utils';
 import { authMiddleware } from '../middleware/auth.middleware';
 
 const router = Router();
@@ -32,7 +32,7 @@ router.get('/', authMiddleware, async (req: Request, res: Response) => {
   try {
     const { page, limit, status } = req.query;
     const token = req.headers.authorization?.split(' ')[1];
-    const pagination = parsePagination(page, limit);
+    const pagination = parsePagination(page as string | number, limit as string | number);
 
     const response = await axios.get(`${ORDER_SERVICE_URL}/orders`, {
       params: {
@@ -74,7 +74,7 @@ router.get('/user/:userId', authMiddleware, async (req: Request, res: Response) 
     const { userId } = req.params;
     const { page, limit, status } = req.query;
     const token = req.headers.authorization?.split(' ')[1];
-    const pagination = parsePagination(page, limit);
+    const pagination = parsePagination(page as string | number, limit as string | number);
 
     const response = await axios.get(
       `${ORDER_SERVICE_URL}/orders/user/${userId}`,
