@@ -25,6 +25,12 @@ export default function Navbar() {
             >
               Home
             </Link>
+            <Link
+              href="/about"
+              className="text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors"
+            >
+              About
+            </Link>
             {isAuthenticated && (
               <>
                 <Link
