@@ -9,12 +9,22 @@ const API_BASE_PATH = '/api/v1';
 // Check if we should use demo mode
 // Demo mode is enabled if:
 // 1. NEXT_PUBLIC_ENABLE_DEMO is explicitly set to 'true'
-// 2. Or we're in browser (client-side) - enables offline-first demo experience
+// 2. Or we're in development (NODE_ENV !== 'production')
+// 3. Or we're on client-side and NEXT_PUBLIC_API_URL is not configured (safety fallback)
 const shouldUseDemoMode = () => {
   if (typeof window === 'undefined') return false; // Don't use demo on server
-  const envDemoMode = process.env.NEXT_PUBLIC_ENABLE_DEMO === 'true';
-  const clientDemoMode = process.env.NODE_ENV !== 'production' || envDemoMode;
-  return clientDemoMode;
+  
+  // If explicitly enabled, use demo
+  if (process.env.NEXT_PUBLIC_ENABLE_DEMO === 'true') return true;
+  
+  // If in development, use demo
+  if (process.env.NODE_ENV !== 'production') return true;
+  
+  // If in production but API URL is not configured, use demo as safety net
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  if (!apiUrl || apiUrl === 'http://localhost:3001') return true;
+  
+  return false;
 };
 
 function getFullUrl(endpoint: string): string {
