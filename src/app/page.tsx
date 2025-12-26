@@ -20,19 +20,17 @@ export default function Home() {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                href="/demo-all"
+                href="/auth"
                 className="px-8 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold hover:shadow-lg transition-shadow text-center"
               >
-                Explore Features
+                Get Started Free
               </Link>
-              <a
-                href="https://voguevault-api.onrender.com/health"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/recommendations"
                 className="px-8 py-3 rounded-lg border-2 border-zinc-300 dark:border-zinc-700 text-zinc-900 dark:text-white font-semibold hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors text-center"
               >
-                API Status
-              </a>
+                Try Aurora AI
+              </Link>
             </div>
 
             {/* Stats */}
