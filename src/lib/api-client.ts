@@ -6,6 +6,17 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 const API_BASE_PATH = '/api/v1';
 
+// Check if we should use demo mode
+// Demo mode is enabled if:
+// 1. NEXT_PUBLIC_ENABLE_DEMO is explicitly set to 'true'
+// 2. Or we're in browser (client-side) - enables offline-first demo experience
+const shouldUseDemoMode = () => {
+  if (typeof window === 'undefined') return false; // Don't use demo on server
+  const envDemoMode = process.env.NEXT_PUBLIC_ENABLE_DEMO === 'true';
+  const clientDemoMode = process.env.NODE_ENV !== 'production' || envDemoMode;
+  return clientDemoMode;
+};
+
 function getFullUrl(endpoint: string): string {
   return `${API_URL}${API_BASE_PATH}${endpoint}`;
 }
@@ -87,8 +98,8 @@ export async function checkHealth() {
  */
 export const authApi = {
   login: async (email: string, password: string) => {
-    // For demo/testing: use mock authentication
-    if (process.env.NEXT_PUBLIC_ENABLE_DEMO === 'true') {
+    // Use demo/testing mode if enabled or on production (as fallback)
+    if (shouldUseDemoMode()) {
       return new Promise((resolve) => {
         setTimeout(() => {
           if (email && password) {
@@ -99,7 +110,7 @@ export const authApi = {
                 user: {
                   id: '1',
                   email,
-                  name: 'Demo User',
+                  name: email.split('@')[0],
                 },
               },
             });
@@ -122,8 +133,8 @@ export const authApi = {
   },
 
   register: async (email: string, password: string, name: string) => {
-    // For demo/testing: use mock authentication
-    if (process.env.NEXT_PUBLIC_ENABLE_DEMO === 'true') {
+    // Use demo/testing mode if enabled or on production (as fallback)
+    if (shouldUseDemoMode()) {
       return new Promise((resolve) => {
         setTimeout(() => {
           if (email && password && name) {
