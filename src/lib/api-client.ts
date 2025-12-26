@@ -4,6 +4,11 @@
  */
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+const API_BASE_PATH = '/api/v1';
+
+function getFullUrl(endpoint: string): string {
+  return `${API_URL}${API_BASE_PATH}${endpoint}`;
+}
 
 interface ApiOptions extends RequestInit {
   skipAuth?: boolean;
@@ -26,7 +31,7 @@ export async function apiCall<T = any>(
   const { skipAuth = false, ...fetchOptions } = options;
 
   try {
-    const url = `${API_URL}${endpoint}`;
+    const url = getFullUrl(endpoint);
     
     // Default headers
     const headers: HeadersInit = {
@@ -81,20 +86,76 @@ export async function checkHealth() {
  * Authentication API calls
  */
 export const authApi = {
-  login: (email: string, password: string) =>
-    apiCall('/api/auth/login', {
+  login: async (email: string, password: string) => {
+    // For demo/testing: use mock authentication
+    if (process.env.NEXT_PUBLIC_ENABLE_DEMO === 'true') {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          if (email && password) {
+            resolve({
+              success: true,
+              data: {
+                token: `demo_token_${Date.now()}`,
+                user: {
+                  id: '1',
+                  email,
+                  name: 'Demo User',
+                },
+              },
+            });
+          } else {
+            resolve({
+              success: false,
+              error: 'Email and password required',
+            });
+          }
+        }, 500);
+      });
+    }
+
+    // Real API call when not in demo mode
+    return apiCall('/auth/login', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
       skipAuth: true,
-    }),
-  
-  register: (email: string, password: string, name: string) =>
-    apiCall('/api/auth/register', {
+    });
+  },
+
+  register: async (email: string, password: string, name: string) => {
+    // For demo/testing: use mock authentication
+    if (process.env.NEXT_PUBLIC_ENABLE_DEMO === 'true') {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          if (email && password && name) {
+            resolve({
+              success: true,
+              data: {
+                token: `demo_token_${Date.now()}`,
+                user: {
+                  id: '1',
+                  email,
+                  name,
+                },
+              },
+            });
+          } else {
+            resolve({
+              success: false,
+              error: 'Email, password, and name required',
+            });
+          }
+        }, 500);
+      });
+    }
+
+    // Real API call when not in demo mode
+    return apiCall('/auth/register', {
       method: 'POST',
       body: JSON.stringify({ email, password, name }),
       skipAuth: true,
-    }),
-  
+    });
+  },
+
   logout: () => {
     if (typeof window !== 'undefined') {
       localStorage.removeItem('authToken');
