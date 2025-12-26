@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="192" height="192" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a855f7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="192" height="192" fill="url(#purpleGradient)" rx="45"/>
+  
+  <!-- VogueVault Logo Text -->
+  <text x="96" y="85" font-size="48" font-weight="bold" text-anchor="middle" fill="white" font-family="Arial, sans-serif">V</text>
+  
+  <!-- Fashion elements - stylized "V" with fashion elements -->
+  <!-- Left side - hanger/dress shape -->
+  <path d="M 60 60 Q 60 80 70 95 L 70 130 Q 70 140 60 140 L 60 145 L 80 145 L 80 140 Q 70 140 70 130 L 70 95" 
+        fill="white" opacity="0.8"/>
+  
+  <!-- Right side - dress shape -->
+  <path d="M 130 60 Q 130 80 120 95 L 120 130 Q 120 140 130 140 L 130 145 L 110 145 L 110 140 Q 120 140 120 130 L 120 95" 
+        fill="white" opacity="0.8"/>
+  
+  <!-- Center - sparkle/star -->
+  <circle cx="96" cy="110" r="8" fill="white" opacity="0.9"/>
+  <path d="M 96 100 L 101 108 L 110 110 L 101 112 L 96 120 L 91 112 L 82 110 L 91 108 Z" fill="white" opacity="0.7"/>
+</svg>
